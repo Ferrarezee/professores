@@ -1,22 +1,24 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // useState o estado atual 
 import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa'
 import './styles.css'
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import ModalProfessores from "../../components/modal";
+import ModalProfessores from "../../components/modal"; // Modal é uma janela onde posso cadastrar o professor
 
 
 export default function Home() {
-    const [dados, setDados] = useState([])
-    const token = localStorage.getItem('token')
-    const [modalOpen, setModalOpen] = useState(false)
+    const [dados, setDados] = useState([]) // ([]) -> uma lista
+    const [modalOpen, setModalOpen] = useState(false) //inicia com ela fechada
     const [professorSelecionado, setProfessorSelecionado] = useState(null)
+    const [seta, setSeta] = useState(false)
+    const token = localStorage.getItem('token')
+
 
     useEffect(() => {
         if (!token) return;
         
-        const fetchData = async () => {
+        const fetchData = async () => { //async assincrona (vai ler todos os valores)
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/professores',
                     {
@@ -25,14 +27,14 @@ export default function Home() {
                         }
                     }
                 )
-                setDados(response.data)
+                setDados(response.data) // data (dados)
             } catch (error) {
                 console.log(error)
             }
         }
 
-        fetchData()
-    }, [])
+        fetchData() 
+    }, [seta])
 
     const apagar = async (id) => {
         if (window.confirm("Tem certeza? ")) {
@@ -40,11 +42,12 @@ export default function Home() {
                 await axios.delete(`http://127.0.0.1:8000/api/professor/${id}`,
                     {
                         headers: {
-                            Authorization: `Bearer ${token}`
+                            Authorization: `Bearer ${token}` // token (serve para a armazenar )
                         }
                     }
                 )
                 setDados(dados.filter((professor) => { professor.id !== id }))
+                setSeta(!seta)
             } catch (error) {
                 console.error(error)
             }
@@ -68,7 +71,7 @@ export default function Home() {
                 }
             )
             console.log("Dados inseridos com sucesso!", response.data)
-            setDados([...dados, novoProfessor])
+            setDados([...dados, novoProfessor]) // vai manter os dados e apeenas vai acrescentar um novo professor
             setModalOpen(false)
         } catch (error) {
             console.error(error)
@@ -93,7 +96,7 @@ export default function Home() {
                 }
             )
             console.log("Dados atualizados com sucesso!", response.data)
-            setDados(dados.map((professor)=> professor.id === professorAtualizado.id ? professorAtualizado : professor))
+            setDados(dados.map((professor)=> professor.id === professorAtualizado.id ? professorAtualizado : professor)) // dados.map trasnforma os dados em uma tabela, separar por linha
             setModalOpen(false)
         } catch (error) {
             console.error(error)
@@ -124,7 +127,7 @@ export default function Home() {
                                 <tr key={professor.id} className="campos">
                                     <td className="icons">
                                         <div className="col1">
-                                            <FaEdit className="edit" />
+                                            <FaEdit className="edit" onClick={() => atualizar(professorSelecionado)}/>
                                         </div>
                                         <div className="col2">
                                             <FaTrash className="delete" onClick={() => apagar(professor.id)} />
