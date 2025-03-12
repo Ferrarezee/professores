@@ -1,5 +1,5 @@
 .container_home {
-    background-color: rgb(211, 170, 250);
+    background-color: rgb(207, 139, 252);
     width: 800px;
     height: 500px;
     display: flex;
@@ -40,7 +40,7 @@
 }
 .col4{
     /* background-color: rgb(209, 197, 37); */
-    width: 130px;
+    width: 60px;
 }
 .col5{
     /* background-color: aqua; */
@@ -65,7 +65,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(138, 40, 218);
+    background-color: rgb(148, 78, 206);
     width: 95%;
     height: 50px;
     border-radius: 10px;
