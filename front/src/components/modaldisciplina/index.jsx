@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import './styles.css'
 
-const ModalProfessores = ({
+const ModalDisciplina = ({
     isOpen,
     onClose,
-    professorSelecionado,
+    DisciplinaSelecionado,
     setSeta,
     seta
 }) => {
     if (!isOpen) return null
 
-    const [id, setId] = useState(professorSelecionado?.id ?? '')
-    const [ni, setNi] = useState(professorSelecionado?.ni ?? '')
     const [nome, setNome] = useState(professorSelecionado?.nome ?? '')
     const [email, setEmail] = useState(professorSelecionado?.email ?? '')
     const [tel, setTel] = useState(professorSelecionado?.tel ?? '')
@@ -22,7 +20,7 @@ const ModalProfessores = ({
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const novoProfessor = { ni, nome, email, tel, ocupacao }
+        const novoProfessor = {nome, email, tel, ocupacao }
         if (professorSelecionado) {
             atualizar({ ...professorSelecionado, ...novoProfessor })
         } else {
