@@ -47,3 +47,12 @@
 .title{
     width: 40%;
 }
+
+.exit{
+    display: flex;
+    width: 70px;
+    height: 100px;
+    align-items: center;
+    justify-content: end;
+    font-size: 25px;
+}

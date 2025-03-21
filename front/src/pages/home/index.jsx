@@ -1,16 +1,23 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react"; // useState o estado atual 
-import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa'
+//import { FaEdit, FaTrash, FaPlus, FaSearch } from 'react-icons/fa'
 import './styles.css'
 import Header from "../../components/header";
 import Footer from "../../components/footer";
-import ModalProfessores from "../../components/modal"; // Modal é uma janela onde posso cadastrar o professor
+import {useNavigate} from 'react-router-dom'
 
 
 export default function Home() {
-return(
-    <>
-    <h1>Home</h1>
-    </>
-)
+    const navigate = useNavigate()
+    return(
+        <div>
+            <Header/>
+            <div className="container_home">
+                <h1>Home</h1>
+                <button onClick={() =>navigate('/professor')}>Professores</button>
+                <button onClick={() =>navigate('/disciplinas')}>Disciplinas</button>
+            </div>
+            <Footer/>
+        </div>
+    )
 }

@@ -5,70 +5,65 @@ import './styles.css'
 const ModalDisciplina = ({
     isOpen,
     onClose,
-    DisciplinaSelecionado,
+    DisciplinaSelecionada,
     setSeta,
     seta
 }) => {
     if (!isOpen) return null
 
-    const [nome, setNome] = useState(professorSelecionado?.nome ?? '')
-    const [email, setEmail] = useState(professorSelecionado?.email ?? '')
-    const [tel, setTel] = useState(professorSelecionado?.tel ?? '')
-    const [ocupacao, setOcupacao] = useState(professorSelecionado?.ocupacao ?? '')
+    const [disciplina, setdisciplina] = useState(DisciplinaSelecionada?.disciplina ?? '')
+    const [codigo, setCodigo] = useState(DisciplinaSelecionada?.codigo ?? '')
+    const [cargaHoraria, setCargaHoraria] = useState(DisciplinaSelecionada?.cargaHoraria ?? '')
     const token = localStorage.getItem('token')
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const novoProfessor = {nome, email, tel, ocupacao }
-        if (professorSelecionado) {
-            atualizar({ ...professorSelecionado, ...novoProfessor })
+        const novaDisciplina = { disciplina, codigo, cargaHoraria }
+        if (DisciplinaSelecionada) {
+            atualizar({ ...DisciplinaSelecionada, ...DisciplinaSelecionada })
         } else {
-            console.log("Teste novo professor: ", novoProfessor)
-            criar(novoProfessor)
+            console.log("Teste nova disciplina: ", DisciplinaSelecionada)
+            criar(novaDisciplina)
         }
     }
 
-    const newTeacher = async () =>{
+    const newDisc = async () => {
         console.log("Chegou")
-      
-            await axios.post('http://127.0.0.1:8000/api/professores',
-                {
-                    ni: ni, // direita modal e o esquerda 
-                    nome: nome,
-                    email: email,
-                    tel: tel,
-                    ocupacao: ocupacao
-                },{
-                    headers:{
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            )
-            console.log("Professor inserido com sucesso!")
-            setSeta(!seta) // valor booleano (falso ou verdadeiro)
-            onClose(true)
-      
-    }
+        await axios.post('http://127.0.0.1:8000/api/disciplina',
 
-    const editTeacher = async () =>{
-        await axios.put(`http://127.0.0.1:8000/api/professor/${professorSelecionado.id}`,
             {
-                ni: ni,
-                nome: nome,
-                email: email,
-                tel: tel,
-                ocupacao: ocupacao
-            },{
-                headers:{
-                    Authorization: `Bearer ${token}`
-                }
+                disciplina: disciplina, // direita modal e o esquerda 
+                codigo: codigo,
+                cargaHoraria: cargaHoraria,
+            }, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
+        }
         )
-        console.log("Professor inserido com sucesso!")
+        console.log("Disciplina inserida com sucesso!")
         setSeta(!seta) // valor booleano (falso ou verdadeiro)
         onClose(true)
-      
+
+    }
+
+    const editTeacher = async () => {
+        await axios.put(`http://127.0.0.1:8000/api/disciplinas/${DisciplinaSelecionada.id}`,
+            {
+                disciplina: disciplina, // direita modal e o esquerda 
+                codigo: codigo,
+                cargaHoraria: cargaHoraria,
+            }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        )
+        console.log("Disciplina inserida com sucesso!")
+        setSeta(!seta) // valor booleano (falso ou verdadeiro)
+        onClose(true)
+
     }
 
     return (
@@ -77,55 +72,43 @@ const ModalDisciplina = ({
                 <div className="head-modal">
                     <button className="close-button" onClick={onClose}>X</button>
                 </div>
-                <h2>{professorSelecionado ? "Editar" : "Cadastrar"}</h2>
+                <h2>{DisciplinaSelecionada ? "Editar" : "Cadastrar"}</h2>
                 <div className="body-modal">
                     <form onSubmit={handleSubmit}>
                         <div className="caixa1">
                             <input
-                                className="ni-modal"
-                                value={ni}
-                                placeholder="ni"
-                                onChange={(e) => setNi(e.target.value)}
+                                className="disciplina-modal"
+                                value={disciplina}
+                                placeholder="disciplina"
+                                onChange={(e) => setdisciplina(e.target.value)}
                             />
                             <input
-                                className="nome-modal"
-                                value={nome}
-                                placeholder="nome"
-                                onChange={(e) => setNome(e.target.value)}
+                                className="codigo-modal"
+                                value={codigo}
+                                placeholder="codigo"
+                                onChange={(e) => setCodigo(e.target.value)}
                             />
                             <input
-                                className="email-modal"
-                                value={email}
-                                placeholder="email"
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <input
-                                className="tel-modal"
-                                value={tel}
-                                placeholder="tel"
-                                onChange={(e) => setTel(e.target.value)}
-                            />
-                            <input
-                                className="ocupacao-modal"
-                                value={ocupacao}
-                                placeholder="ocupacao"
-                                onChange={(e) => setOcupacao(e.target.value)}
+                                className="cargaHoraria-modal"
+                                value={cargaHoraria}
+                                placeholder="cargaHoraria"
+                                onChange={(e) => setCargaHoraria(e.target.value)}
                             />
                         </div>
                         <div className="caixa2">
-                            
+
                         </div>
 
                     </form>
                 </div>
                 <div className="footer-modal">
-                    <button 
-                        type="submit" 
-                        className="button-save" 
-                        onClick={professorSelecionado ? editTeacher : newTeacher}
-                        >
-                            {professorSelecionado ? "Atualizar" : "Salvar"}
-                        </button>
+                    <button
+                        type="submit"
+                        className="button-save"
+                        onClick={DisciplinaSelecionada ? editTeacher : newDisc}
+                    >
+                        {DisciplinaSelecionada ? "Atualizar" : "Salvar"}
+                    </button>
                 </div>
             </div>
         </div>
@@ -133,4 +116,4 @@ const ModalDisciplina = ({
 }
 
 
-export default ModalProfessores
+export default ModalDisciplina

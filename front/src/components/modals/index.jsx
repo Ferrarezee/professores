@@ -115,7 +115,6 @@ const ModalProfessores = ({
                             />
                         </div>
                         <div className="caixa2">
-                            
                         </div>
 
                     </form>

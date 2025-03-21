@@ -24,9 +24,11 @@
 
 .body-modal input{
     display: flex;
+    width: 400px;
+    height: 50px;
 }
 
-.ni-modal{
+.disciplina-modal{
     width: 100px;
     padding: 5px;
     margin-top: 10px;
@@ -35,7 +37,7 @@
     border-radius: 5px;
 }
 
-.nome-modal{
+.codigo-modal{
     width: 300px;
     padding: 5px;
     margin-top: 10px;
@@ -44,25 +46,7 @@
     border-radius: 5px;
 }
 
-.email-modal{
-    width: 300px;
-    padding: 5px;
-    margin-top: 10px;
-    height: 30px;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.tel-modal{
-    width: 300px;
-    padding: 5px;
-    margin-top: 10px;
-    height: 30px;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.ocupacao-modal{
+.cargaHoraria-modal{
     width: 300px;
     padding: 5px;
     margin-top: 10px;
@@ -80,9 +64,9 @@
 
 .close-button{
     display: flex;
-    border-radius: 30px;
+    border-radius: 80px;
     box-shadow: 0 5px 15px rgb(12, 41, 31);
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .close-button:hover{

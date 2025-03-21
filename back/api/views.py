@@ -8,6 +8,12 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import Disciplina
 from .serializer import DisciplinaSerializer
+from .models import Ambiente
+from .serializer import AmbienteSerializer
+from .models import Cursos
+from .serializer import CursosSerializer
+from .models import Turma
+from .serializer import TurmaSerializer
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
