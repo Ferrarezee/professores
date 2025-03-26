@@ -29,11 +29,11 @@ class Ambiente(models.Model):
 
 class Cursos(models.Model):
 
-    PERIODO = [
-        ('M', 'Manhã'),
-        ('T', 'Tarde'),
-        ('N', 'Noturno'),
-        ('S', 'Superior')
+    TIPO_CURSO = [
+        ('CT', 'Curso Tecnico'),
+        ('CAI', 'Curso de Aprendizagem Industrial'),
+        ('CS', 'Curso Superior'),
+        ('FIC', 'Formação Inicial Continuada')
     ]
 
     codigo = models.CharField(max_length=255)

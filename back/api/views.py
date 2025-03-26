@@ -40,6 +40,7 @@ class ProfessoresDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ProfessorSerializer
     permission_classes = [IsAuthenticated]
 
+
 class DisciplinaView(ListCreateAPIView):
     queryset = Disciplina.objects.all()
     serializer_class = DisciplinaSerializer
@@ -48,4 +49,41 @@ class DisciplinaView(ListCreateAPIView):
 class DisciplinasDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Disciplina.objects.all()
     serializer_class = DisciplinaSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class AmbienteView(ListCreateAPIView):
+    queryset = Ambiente.objects.all()
+    serializer_class = AmbienteSerializer
+    permission_classes = [IsAuthenticated]
+
+class AmbienteDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Ambiente.objects.all()
+    serializer_class = AmbienteSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class CursosView(ListCreateAPIView):
+    queryset = Cursos.objects.all()
+    serializer_class = CursosSerializer
+    permission_classes = [IsAuthenticated]
+
+@api_view(['GET'])
+def get_tipo_curso_choices(request):
+    return Response(Cursos.TIPO_CURSO)
+
+class CursosDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Cursos.objects.all()
+    serializer_class = CursosSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class TurmaView(ListCreateAPIView):
+    queryset = Turma.objects.all()
+    serializer_class = TurmaSerializer
+    permission_classes = [IsAuthenticated]
+
+class TurmaDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Turma.objects.all()
+    serializer_class = TurmaSerializer
     permission_classes = [IsAuthenticated]

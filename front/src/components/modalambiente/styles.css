@@ -1,0 +1,106 @@
+.modal-modal{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(190, 78, 235);
+    background: rgba(0,0,0,0.3);
+}
+
+.container-modal{
+    width: 500px;
+    height: 500px;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-around;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgb(110, 68, 150);
+}
+
+.body-modal input{
+    display: flex;
+    width: 400px;
+    height: 50px;
+}
+
+.codigo-modal{
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.sala-modal{
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.capacidade-modal{
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.responsavel-modal{
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.periodo-modal{
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.button-save{
+    width: 150px;
+    height: 50px;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px;
+}
+
+.close-button{
+    display: flex;
+    border-radius: 80px;
+    box-shadow: 0 5px 15px rgb(12, 41, 31);
+    font-size: 15px;
+}
+
+.close-button:hover{
+    color: blueviolet;
+}
+
+.head-modal{
+    display: flex;
+    justify-content: right;
+}
+
+.body-modal{    
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-modal{
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+}
