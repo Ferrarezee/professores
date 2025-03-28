@@ -14,7 +14,6 @@ export default function Cursos() {
     const [seta, setSeta] = useState(false)
     const token = localStorage.getItem('token')
 
-
     useEffect(() => {
         if (!token) return;
         
@@ -64,6 +63,7 @@ export default function Cursos() {
                     codigo: codigo,
                     tipo: tipo,
                     cargaHoraria: cargaHoraria,
+                    sigla: sigla
                 },{
                     headers:{
                         Authorization: `Bearer ${token}`
@@ -98,25 +98,27 @@ export default function Cursos() {
                                 <div className="col5"><th>CODIGO</th></div>
                                 <div className="col6"><th>CARGA HORARIA</th></div>
                                 <div className="col7"><th>TIPO</th></div>
+                                <div className="col8"><th>SIGLA</th></div>
                             </tr>
                         </thead>
                         <tbody> 
-                            {dados.map((cursos) => ( //dados é uma constante (veio do estado atual)
-                                <tr key={cursos.id} className="campos">
+                            {dados.map((dados) => ( //dados é uma constante (veio do estado atual)
+                                <tr key={dados.id} className="campos">
                                     <td className="icons">
                                         <div className="col1"> 
-                                            <FaEdit className="edit" onClick={() => atualizar(cursos) }/> 
+                                            <FaEdit className="edit" onClick={() => atualizar(dados) }/> 
                                         </div>
                                         <div className="col2">
-                                            <FaTrash className="delete" onClick={() => apagar(cursos.id)} />
+                                            <FaTrash className="delete" onClick={() => apagar(dados.id)} />
                                         </div>
 
                                     </td>
-                                    <div className="col3"><td>{cursos.id}</td></div>
-                                    <div className="col4"><td>{cursos.cursos}</td></div>
-                                    <div className="col5"><td>{cursos.codigo}</td></div>
-                                    <div className="col6"><td>{cursos.cargaHoraria}</td></div>
-                                    <div className="col7"><td>{cursos.tipo}</td></div>
+                                    <div className="col3"><td>{dados.id}</td></div>
+                                    <div className="col4"><td>{dados.curso}</td></div>
+                                    <div className="col5"><td>{dados.codigo}</td></div>
+                                    <div className="col6"><td>{dados.cargaHoraria}</td></div>
+                                    <div className="col7"><td>{dados.tipo}</td></div>
+                                    <div className="col8"><td>{dados.sigla}</td></div>
                                 </tr>
                             ))}
                         </tbody>

@@ -111,7 +111,6 @@ export default function Ambiente() {
                                         <div className="col2">
                                             <FaTrash className="delete" onClick={() => apagar(ambi.id)} />
                                         </div>
-
                                     </td>
                                     <div className="col3"><td>{ambiente.id}</td></div>
                                     <div className="col4"><td>{ambiente.codigo}</td></div>

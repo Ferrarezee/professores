@@ -40,7 +40,6 @@ class ProfessoresDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ProfessorSerializer
     permission_classes = [IsAuthenticated]
 
-
 class DisciplinaView(ListCreateAPIView):
     queryset = Disciplina.objects.all()
     serializer_class = DisciplinaSerializer
@@ -51,11 +50,14 @@ class DisciplinasDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = DisciplinaSerializer
     permission_classes = [IsAuthenticated]
 
-
 class AmbienteView(ListCreateAPIView):
     queryset = Ambiente.objects.all()
     serializer_class = AmbienteSerializer
     permission_classes = [IsAuthenticated]
+
+@api_view(['GET'])
+def get_periodo_choices(request):
+    return Response(Ambiente.PERIODO)
 
 class AmbienteDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Ambiente.objects.all()
@@ -76,7 +78,6 @@ class CursosDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Cursos.objects.all()
     serializer_class = CursosSerializer
     permission_classes = [IsAuthenticated]
-
 
 class TurmaView(ListCreateAPIView):
     queryset = Turma.objects.all()

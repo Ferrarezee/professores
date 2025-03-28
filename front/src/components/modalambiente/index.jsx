@@ -11,43 +11,62 @@ const ModalAmbiente = ({
 }) => {
     if (!isOpen) return null
 
-    const [codigo, setCodigo] = useState(AmbienteSelecionado?.codigo ?? '')
     const [sala, setSala] = useState(AmbienteSelecionado?.sala ?? '')
     const [capacidade, setCapacidade] = useState(AmbienteSelecionado?.capacidade ?? '')
     const [responsavel, setResponsavel] = useState(AmbienteSelecionado?.responsavel ?? '')
     const [periodo, setPeriodo] = useState(AmbienteSelecionado?.periodo ?? '')
+    const [periodoOptions, setPeriodoOptions] = useState([]);
     const token = localStorage.getItem('token')
+
+    useEffect(() => {
+        async function fetchPeriodoOptions() {
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/periodo_choices", 
+                    {
+                        headers:{
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+    
+                setPeriodoOptions(response.data); // Aqui recebe a lista corretamente
+    
+            } catch (error) {
+                console.error("Erro ao buscar opções de tipo de curso:", error);
+            }
+        }
+    
+        fetchPeriodoOptions();
+    }, []);
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const novoAmbiente = { codigo, sala, capacidade, responsavel, periodo }
+        const novoAmbiente = { sala, capacidade, responsavel, periodo}
         if (AmbienteSelecionado) {
             atualizar({ ...AmbienteSelecionado, ...AmbienteSelecionado })
         } else {
-            console.log("Teste novo ambiente: ", AmbienteSelecionado)
+            console.log("Teste novo Ambiente: ", AmbienteSelecionado)
             criar(novoAmbiente)
         }
     }
 
     const newAmbi = async () => {
         console.log("Chegou")
-        await axios.post('http://127.0.0.1:8000/api/ambiente',
+        await axios.post ('http://127.0.0.1:8000/api/ambiente',
 
-            {
-                 // direita modal e o esquerda 
-                codigo: codigo,
+            { 
                 sala: sala,
                 capacidade: capacidade,
                 responsavel: responsavel,
                 periodo: periodo,
             }, {
-            headers: {
-                Authorization: `Bearer ${token}`
+                 headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        }
         )
-        console.log("Ambiente inserida com sucesso!")
+        console.log("Ambiente inserido com sucesso!")
         setSeta(!seta) // valor booleano (falso ou verdadeiro)
         onClose(true)
 
@@ -55,9 +74,7 @@ const ModalAmbiente = ({
 
     const editAmbi = async () => {
         await axios.put(`http://127.0.0.1:8000/api/ambiente/${AmbienteSelecionado.id}`,
-            {
-                // direita modal e o esquerda 
-                codigo: codigo,
+            { 
                 sala: sala,
                 capacidade: capacidade,
                 responsavel: responsavel,
@@ -85,14 +102,8 @@ const ModalAmbiente = ({
                     <form onSubmit={handleSubmit}>
                         <div className="caixa1">
                             <input
-                                className="codigo-modal"
-                                value={disciplina}
-                                placeholder="codigo"
-                                onChange={(e) => setCodigo(e.target.value)}
-                            />
-                            <input
                                 className="sala-modal"
-                                value={codigo}
+                                value={sala}
                                 placeholder="sala"
                                 onChange={(e) => setSala(e.target.value)}
                             />
@@ -108,12 +119,22 @@ const ModalAmbiente = ({
                                 placeholder="responsavel"
                                 onChange={(e) => setResponsavel(e.target.value)}
                             />
-                            <input
+                            <select
                                 className="periodo-modal"
                                 value={periodo}
-                                placeholder="periodo"
                                 onChange={(e) => setPeriodo(e.target.value)}
-                            />
+                            >
+                                <option value="periodo">Selecione o periodo</option>
+                                {periodoOptions.length > 0 ? (
+                                    periodoOptions.map((option) => (
+                                        <option key={option[0]} value={option[0]}>
+                                            {option[1]}
+                                        </option>
+                                    ))
+                                ) : (
+                                    <option disabled>Carregando...</option>
+                                )}
+                            </select>
                         </div>
                         <div className="caixa2">
 

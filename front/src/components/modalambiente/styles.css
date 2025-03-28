@@ -28,15 +28,6 @@
     height: 50px;
 }
 
-.codigo-modal{
-    width: 300px;
-    padding: 5px;
-    margin-top: 10px;
-    height: 30px;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
 .sala-modal{
     width: 300px;
     padding: 5px;
@@ -45,6 +36,7 @@
     font-size: 18px;
     border-radius: 5px;
 }
+
 .capacidade-modal{
     width: 300px;
     padding: 5px;
@@ -69,7 +61,6 @@
     font-size: 18px;
     border-radius: 5px;
 }
-
 .button-save{
     width: 150px;
     height: 50px;

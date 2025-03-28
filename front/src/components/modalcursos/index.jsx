@@ -16,6 +16,7 @@ const ModalCursos = ({
     const [tipo, setTipo] = useState(CursosSelecionado?.tipo ?? '')
     const [cargaHoraria, setcargaHoraria] = useState(CursosSelecionado?.cargaHoraria ?? '')
     const [tipoCursoOptions, setTipoCursoOptions] = useState([]);
+    const [sigla, setSigla] = useState('')
     const token = localStorage.getItem('token')
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const ModalCursos = ({
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const novoCursos = { codigo, curso, tipo, cargaHoraria}
+        const novoCursos = { codigo, curso, tipo, cargaHoraria, sigla}
         if (CursosSelecionado) {
             atualizar({ ...CursosSelecionado, ...CursosSelecionado })
         } else {
@@ -53,20 +54,21 @@ const ModalCursos = ({
 
     const newCur = async () => {
         console.log("Chegou")
-        await axios.post('http://127.0.0.1:8000/api/cursos',
+        await axios.post ('http://127.0.0.1:8000/api/cursos',
 
-            {// direita modal e o esquerda 
+            { 
                 codigo: codigo,
                 curso: curso,
                 tipo: tipo,
                 cargaHoraria: cargaHoraria,
+                sigla: sigla
             }, {
-            headers: {
-                Authorization: `Bearer ${token}`
+                 headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        }
         )
-        console.log("Cursos inserida com sucesso!")
+        console.log("Cursos inserido com sucesso!")
         setSeta(!seta) // valor booleano (falso ou verdadeiro)
         onClose(true)
 
@@ -80,6 +82,7 @@ const ModalCursos = ({
                 curso: curso,
                 tipo: tipo,
                 cargaHoraria: cargaHoraria,
+                sigla: sigla
             }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -113,6 +116,12 @@ const ModalCursos = ({
                                 value={curso}
                                 placeholder="curso"
                                 onChange={(e) => setCurso(e.target.value)}
+                            />
+                            <input
+                                className="sigla-modal"
+                                value={sigla}
+                                placeholder="sigla"
+                                onChange={(e) => setSigla(e.target.value)}
                             />
                             <select
                                 className="tipo_curso-modal"
